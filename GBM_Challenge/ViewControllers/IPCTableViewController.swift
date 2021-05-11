@@ -14,6 +14,9 @@ class IPCTableViewController: UITableViewController, IPCModelDelegate {
     var ipcCpntroller = IPCController()
     var delayThread: DispatchWorkItem?
     let dekayTime = 5.0 // Tiempo de espera de 5 segundos
+    var descendingOrder = true
+    let ascendingImageName = "arrow.up.to.line.alt"
+    let descendingImageName = "arrow.down.to.line.alt"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +36,19 @@ class IPCTableViewController: UITableViewController, IPCModelDelegate {
         invalidateDelayThread()
     }
     
+    @IBAction func toggleOrder(_ sender: Any){
+        descendingOrder = !descendingOrder
+        navigationItem.rightBarButtonItem?.image = UIImage(
+            systemName: descendingOrder ? ascendingImageName : descendingImageName
+        )
+        sortData()
+        tableView.reloadData()
+    }
+    
     // MARK: - Functions
+    func sortData(){
+        modelData.sort { ($0.date > $1.date) == descendingOrder }
+    }
     
     func reloadServiceData(){
         ipcCpntroller.fetchDataFromService()
@@ -103,6 +118,7 @@ class IPCTableViewController: UITableViewController, IPCModelDelegate {
     //MARK: - IPC Model delegate
     func ipcDataFetched(_ points: [IPCPoint]) {
         modelData = points
+        sortData()
         tableView.reloadData()
         self.navigationItem.titleView = nil
         startDelayTask()

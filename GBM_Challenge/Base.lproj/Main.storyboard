@@ -96,6 +96,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6RB-20-cyF">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" systemColor="systemIndigoColor"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="la4-14-ryr" kind="relationship" relationship="rootViewController" id="fCE-Gu-UXk"/>
@@ -135,6 +140,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Gráfica IPC" id="jWf-6Q-P2d">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="list.bullet" catalog="system" id="LX9-4T-XaA">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="listButtonPressed:" destination="la4-14-ryr" id="tkV-im-hDl"/>
                             </connections>
@@ -190,7 +196,14 @@
                             <outlet property="delegate" destination="zKx-g0-Ydd" id="egT-HN-QgV"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Obb-TC-Raj"/>
+                    <navigationItem key="navigationItem" id="Obb-TC-Raj">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="arrow.up.to.line.alt" catalog="system" id="IVH-Hg-B1r">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="toggleOrder:" destination="zKx-g0-Ydd" id="Wqx-rq-e13"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FKe-u8-kL0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -198,6 +211,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.up.to.line.alt" catalog="system" width="111" height="128"/>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
         <image name="touchid" catalog="system" width="128" height="122"/>
         <systemColor name="labelColor">
