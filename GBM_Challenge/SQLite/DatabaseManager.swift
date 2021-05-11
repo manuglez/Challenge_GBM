@@ -8,14 +8,17 @@
 import Foundation
 
 class DatabaseManager {
+    private let sqliteQueue = DispatchQueue(label: "sqliteQueue")
     
     static let shared = DatabaseManager()
-    private let db: SQLiteDB!
+    private var db: SQLiteDB!
     private let database_name = "database.sqlite"
     
     private init(){
-        db = SQLiteDB(databaseName: database_name)
-        _ = db.createTable(query: IPCPoint.createQuery())
+        sqliteQueue.sync{
+            db = SQLiteDB(databaseName: database_name)
+            _ = db.createTable(query: IPCPoint.createQuery())
+        }
     }
     
     func insert(ipc: IPCPoint) -> Bool{
@@ -23,7 +26,11 @@ class DatabaseManager {
         attrs.remove(at: 0)
         if let query = ipc.insertQuery(cols: attrs)
         {
-            return db.insert(query: query)
+            var returnValue = false
+            sqliteQueue.sync{
+                returnValue = db.insert(query: query)
+            }
+            return returnValue
         }
         return false
     }
@@ -31,18 +38,25 @@ class DatabaseManager {
     func fetchAllIPC() -> [IPCPoint]{
         var allIPC: [IPCPoint] = []
         let selectQuery = IPCPoint.selectAllQuery()
-        let result = db.select(query: selectQuery)
-        
-        print(result)
-        for row in result {
-            allIPC.append(IPCPoint(fromDictionary: row))
+        var resultOp:  [[String : Any]]?
+        sqliteQueue.sync{
+            resultOp = db.select(query: selectQuery)
         }
-        
+        if let result = resultOp {
+            print(result)
+            for row in result {
+                allIPC.append(IPCPoint(fromDictionary: row))
+            }
+        }
         return allIPC
     }
     
     func clearTableIPC() {
-        let deleteSuccess = db.delete(from: IPCPoint.tableName, where: nil)
+        var deleteSuccess = false
+        sqliteQueue.sync{
+            deleteSuccess = db.delete(from: IPCPoint.tableName, where: nil)
+        }
+        
         if deleteSuccess {
             print("Clear IPC success")
         }

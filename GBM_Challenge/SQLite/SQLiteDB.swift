@@ -13,6 +13,7 @@ class SQLiteDB {
     init(databaseName dbname: String) {
         let fileManager = FileManager.default
         do {
+            sqlite3_shutdown();
             let baseUrl = try fileManager.url(
                 for: .documentDirectory,
                 in: .userDomainMask,
@@ -26,6 +27,8 @@ class SQLiteDB {
                 if status == SQLITE_OK {
                     print("DB Created")
                     self.dbPointer = pointer
+                } else {
+                    print("unable to open database")
                 }
             }
         } catch {
@@ -53,7 +56,6 @@ class SQLiteDB {
             var statement: OpaquePointer? = nil
             if sqlite3_prepare_v2(dbPointer, insertQuery, -1, &statement, nil) == SQLITE_OK {
                 if sqlite3_step(statement) == SQLITE_DONE {
-                    print("Record inserted")
                     success =  true
                 }
             } else {
@@ -114,6 +116,7 @@ class SQLiteDB {
     }
     
     func delete(from tableName: String, where conditionDictionary: [String: SQLiteDataType]?) -> Bool{
+        var returnValue = false
         if let dbPointer = dbPointer {
             var whereCondition = ""
             if let conditions = conditionDictionary {
@@ -126,23 +129,22 @@ class SQLiteDB {
             }
             let deleteQuery = "DELETE FROM " + tableName + whereCondition
             var deleteStatement: OpaquePointer?
-            defer {
-                sqlite3_finalize(deleteStatement)
-            }
+          
               if sqlite3_prepare_v2(dbPointer, deleteQuery, -1, &deleteStatement, nil) ==
                   SQLITE_OK {
                 if sqlite3_step(deleteStatement) == SQLITE_DONE {
                   print("Row deleted")
-                    return true
+                    returnValue = true
                 } else {
                   print("Error deleting row")
                 }
               } else {
                 print("ERROR on delete prepare")
               }
+            sqlite3_finalize(deleteStatement)
         }
         
-        return false
+        return returnValue
     }
     
     private func getCCharText(_ cText: UnsafePointer<CChar>) -> String{
