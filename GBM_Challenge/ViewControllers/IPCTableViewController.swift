@@ -12,11 +12,55 @@ class IPCTableViewController: UITableViewController, IPCModelDelegate {
     
     var modelData: [IPCPoint] = []
     var ipcCpntroller = IPCController()
+    var delayThread: DispatchWorkItem?
+    let dekayTime = 5.0 // Tiempo de espera de 5 segundos
     
     override func viewDidLoad() {
         super.viewDidLoad()
         ipcCpntroller.modelDelegate = self
         ipcCpntroller.fetchAllDataPoints()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        startDelayTask()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        ipcCpntroller.modelDelegate = nil
+        ipcCpntroller.viewModelDelegate = nil
+        invalidateDelayThread()
+    }
+    
+    // MARK: - Functions
+    
+    func reloadServiceData(){
+        ipcCpntroller.fetchDataFromService()
+        let indicator = UIActivityIndicatorView(style: .medium)
+        self.navigationItem.titleView = indicator
+        indicator.startAnimating()
+    }
+    
+    // MARK: - Timer % Delay Functions
+    func startDelayTask()
+    {
+        delayThread = DispatchWorkItem(block: {
+            self.reloadServiceData()
+        })
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + dekayTime, execute: delayThread!)
+    }
+    
+    func invalidateDelayThread()
+    {
+        if let delayT = delayThread
+        {
+            if !delayT.isCancelled{
+                delayT.cancel()
+            }
+        }
+        delayThread = nil
     }
 
     // MARK: - Table view data source
@@ -60,5 +104,7 @@ class IPCTableViewController: UITableViewController, IPCModelDelegate {
     func ipcDataFetched(_ points: [IPCPoint]) {
         modelData = points
         tableView.reloadData()
+        self.navigationItem.titleView = nil
+        startDelayTask()
     }
 }
