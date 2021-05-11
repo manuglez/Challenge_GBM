@@ -16,28 +16,77 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="touchid" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="8e5-KA-u7e">
+                                <rect key="frame" x="145" y="186.5" width="124" height="116"/>
+                                <color key="tintColor" systemColor="systemIndigoColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="124" id="Upy-Si-Oyd"/>
+                                    <constraint firstAttribute="height" constant="115.5" id="XoK-D0-Elq"/>
+                                </constraints>
+                            </imageView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sbi-lw-x6x" userLabel="Middle Aux">
+                                <rect key="frame" x="0.0" y="445.5" width="414" height="5"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="5" id="eEI-JE-ZrC"/>
+                                </constraints>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hGD-yq-nOg" userLabel="Top Aux">
+                                <rect key="frame" x="0.0" y="44" width="5" height="401.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="5" id="4Ru-G3-FlM"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Touch ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dQ-Mj-ZiG">
+                                <rect key="frame" x="145" y="334" width="124.5" height="34.5"/>
+                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="30"/>
+                                <color key="textColor" systemColor="systemIndigoColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kWH-WV-1s0">
-                                <rect key="frame" x="163.5" y="433" width="87" height="30"/>
-                                <state key="normal" title="Autenticarse"/>
+                                <rect key="frame" x="26" y="797" width="362" height="44"/>
+                                <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="QEn-Ul-i4S"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Authenticate">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bZ4-W3-bKh"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemTealColor"/>
                         <constraints>
-                            <constraint firstItem="kWH-WV-1s0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CSQ-pL-TOg"/>
-                            <constraint firstItem="kWH-WV-1s0" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="r9i-6S-oM2"/>
+                            <constraint firstItem="hGD-yq-nOg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2mx-Ds-si1"/>
+                            <constraint firstItem="sbi-lw-x6x" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="9G1-mR-79T"/>
+                            <constraint firstItem="sbi-lw-x6x" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Ac7-o8-VXn"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kWH-WV-1s0" secondAttribute="trailing" constant="26" id="CfM-lf-99u"/>
+                            <constraint firstItem="kWH-WV-1s0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="26" id="DQQ-3U-Sqd"/>
+                            <constraint firstItem="sbi-lw-x6x" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Fan-d4-Yf6"/>
+                            <constraint firstItem="4dQ-Mj-ZiG" firstAttribute="top" secondItem="8e5-KA-u7e" secondAttribute="bottom" constant="31.5" id="Y8M-0R-KHD"/>
+                            <constraint firstItem="8e5-KA-u7e" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bUc-jw-BFV"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="kWH-WV-1s0" secondAttribute="bottom" constant="21" id="eNr-Oq-UVD"/>
+                            <constraint firstItem="4dQ-Mj-ZiG" firstAttribute="centerX" secondItem="8e5-KA-u7e" secondAttribute="centerX" id="glf-3R-GKx"/>
+                            <constraint firstItem="hGD-yq-nOg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="iH9-4w-zhK"/>
+                            <constraint firstItem="8e5-KA-u7e" firstAttribute="centerY" secondItem="hGD-yq-nOg" secondAttribute="centerY" id="kAf-dO-c3s"/>
+                            <constraint firstItem="sbi-lw-x6x" firstAttribute="top" secondItem="hGD-yq-nOg" secondAttribute="bottom" id="pVf-Tj-0tC"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="authButton" destination="kWH-WV-1s0" id="iNM-ka-x03"/>
+                        <outlet property="biometricImage" destination="8e5-KA-u7e" id="qZY-Bc-TXv"/>
+                        <outlet property="biometricLabel" destination="4dQ-Mj-ZiG" id="EKz-pM-bgH"/>
                         <segue destination="Lul-Kp-dKO" kind="show" identifier="toHome" id="P7g-MP-Sqg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4" y="70"/>
+            <point key="canvasLocation" x="-4.3478260869565224" y="69.642857142857139"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9Fk-a9-kdq">
@@ -150,6 +199,7 @@
     </scenes>
     <resources>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
+        <image name="touchid" catalog="system" width="128" height="122"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
@@ -158,6 +208,12 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

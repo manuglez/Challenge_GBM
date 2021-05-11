@@ -29,6 +29,7 @@
 		8D8D1F402647A82D00CCFEDA /* SQLiteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D1F3D2647A82D00CCFEDA /* SQLiteModel.swift */; };
 		8D8D1F422647A89800CCFEDA /* IPCPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D1F412647A89800CCFEDA /* IPCPoint.swift */; };
 		8D8D1F442647ABAB00CCFEDA /* IPCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D1F432647ABAB00CCFEDA /* IPCViewModel.swift */; };
+		8DBA47E2264A0FDA0023BC90 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBA47E1264A0FDA0023BC90 /* UIView+Extension.swift */; };
 		8DBD42982648F67E007BE5D5 /* Biometrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBD42972648F67E007BE5D5 /* Biometrics.swift */; };
 		8DD60CFA26485A0100249CE8 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD60CF926485A0100249CE8 /* Date+Extensions.swift */; };
 		8DD60CFD2648701E00249CE8 /* IPCController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD60CFC2648701E00249CE8 /* IPCController.swift */; };
@@ -82,6 +83,7 @@
 		8D8D1F3D2647A82D00CCFEDA /* SQLiteModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLiteModel.swift; sourceTree = "<group>"; };
 		8D8D1F412647A89800CCFEDA /* IPCPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPCPoint.swift; sourceTree = "<group>"; };
 		8D8D1F432647ABAB00CCFEDA /* IPCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPCViewModel.swift; sourceTree = "<group>"; };
+		8DBA47E1264A0FDA0023BC90 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		8DBD42972648F67E007BE5D5 /* Biometrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Biometrics.swift; sourceTree = "<group>"; };
 		8DD60CF926485A0100249CE8 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		8DD60CFC2648701E00249CE8 /* IPCController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPCController.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				8DD60CF926485A0100249CE8 /* Date+Extensions.swift */,
+				8DBA47E1264A0FDA0023BC90 /* UIView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				8D8D1F2E2647538F00CCFEDA /* NetworkConnectionManager.swift in Sources */,
 				8D8D1F402647A82D00CCFEDA /* SQLiteModel.swift in Sources */,
 				8DD60CFD2648701E00249CE8 /* IPCController.swift in Sources */,
+				8DBA47E2264A0FDA0023BC90 /* UIView+Extension.swift in Sources */,
 				8D8D1EF726474C8300CCFEDA /* AppDelegate.swift in Sources */,
 				8DD60CFA26485A0100249CE8 /* Date+Extensions.swift in Sources */,
 				8D8D1EF926474C8300CCFEDA /* SceneDelegate.swift in Sources */,
@@ -713,6 +717,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XZZ74444UP;
 				INFOPLIST_FILE = GBM_Challenge/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -737,6 +742,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XZZ74444UP;
 				INFOPLIST_FILE = GBM_Challenge/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -9,11 +9,23 @@ import UIKit
 
 class MainAccessViewController: UIViewController {
     let segueIdToHome = "toHome"
+    @IBOutlet weak var authButton: UIButton!
+    @IBOutlet weak var biometricImage: UIImageView!
+    @IBOutlet weak var biometricLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        authButton.backgroundColor = .systemTeal
+        authButton.roundBorders()
+        authButton.colorBorder(.systemIndigo)
+        authButton.tintColor = .systemIndigo
+        authButton.setTitleColor(.systemIndigo, for: .normal
+        )
+        if Biometrics.supportedType() == .face {
+            biometricImage.image = UIImage(systemName: "faceid")
+            biometricLabel.text = "Face ID"
+        }
     }
     
 
