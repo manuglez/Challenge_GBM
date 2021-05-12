@@ -33,6 +33,11 @@
 		8DBD42982648F67E007BE5D5 /* Biometrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DBD42972648F67E007BE5D5 /* Biometrics.swift */; };
 		8DD60CFA26485A0100249CE8 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD60CF926485A0100249CE8 /* Date+Extensions.swift */; };
 		8DD60CFD2648701E00249CE8 /* IPCController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD60CFC2648701E00249CE8 /* IPCController.swift */; };
+		8DE969E1264B55FB00E7757D /* IPCPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D1F412647A89800CCFEDA /* IPCPoint.swift */; };
+		8DE969E2264B573D00E7757D /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DD60CF926485A0100249CE8 /* Date+Extensions.swift */; };
+		8DE969E3264B574300E7757D /* SQLiteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D1F3D2647A82D00CCFEDA /* SQLiteModel.swift */; };
+		8DE969E6264B5DE200E7757D /* SQLiteDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D1F3C2647A82D00CCFEDA /* SQLiteDB.swift */; };
+		8DE969E7264B5DE400E7757D /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8D1F3B2647A82D00CCFEDA /* DatabaseManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +92,7 @@
 		8DBD42972648F67E007BE5D5 /* Biometrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Biometrics.swift; sourceTree = "<group>"; };
 		8DD60CF926485A0100249CE8 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		8DD60CFC2648701E00249CE8 /* IPCController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IPCController.swift; sourceTree = "<group>"; };
+		8DE969E8264B5E4D00E7757D /* GBM_ChallengeTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GBM_ChallengeTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		9332441B9F0FF8E3F0AAAFEB /* Pods-GBM_Challenge.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GBM_Challenge.debug.xcconfig"; path = "Target Support Files/Pods-GBM_Challenge/Pods-GBM_Challenge.debug.xcconfig"; sourceTree = "<group>"; };
 		A16FA918DF832B842AABD567 /* Pods_GBM_ChallengeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GBM_ChallengeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A90675D2767572A9AB0239EC /* Pods-GBM_Challenge-GBM_ChallengeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GBM_Challenge-GBM_ChallengeUITests.debug.xcconfig"; path = "Target Support Files/Pods-GBM_Challenge-GBM_ChallengeUITests/Pods-GBM_Challenge-GBM_ChallengeUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -172,6 +178,7 @@
 			children = (
 				8D8D1F0D26474C8500CCFEDA /* GBM_ChallengeTests.swift */,
 				8D8D1F0F26474C8500CCFEDA /* Info.plist */,
+				8DE969E8264B5E4D00E7757D /* GBM_ChallengeTests-Bridging-Header.h */,
 			);
 			path = GBM_ChallengeTests;
 			sourceTree = "<group>";
@@ -356,6 +363,7 @@
 					};
 					8D8D1F0826474C8500CCFEDA = {
 						CreatedOnToolsVersion = 12.5;
+						LastSwiftMigration = 1250;
 						TestTargetID = 8D8D1EF226474C8300CCFEDA;
 					};
 					8D8D1F1326474C8500CCFEDA = {
@@ -544,6 +552,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D8D1F0E26474C8500CCFEDA /* GBM_ChallengeTests.swift in Sources */,
+				8DE969E1264B55FB00E7757D /* IPCPoint.swift in Sources */,
+				8DE969E7264B5DE400E7757D /* DatabaseManager.swift in Sources */,
+				8DE969E6264B5DE200E7757D /* SQLiteDB.swift in Sources */,
+				8DE969E2264B573D00E7757D /* Date+Extensions.swift in Sources */,
+				8DE969E3264B574300E7757D /* SQLiteModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -761,6 +774,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XZZ74444UP;
 				INFOPLIST_FILE = GBM_ChallengeTests/Info.plist;
@@ -772,6 +786,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "me.testing.GBM-ChallengeTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GBM_ChallengeTests/GBM_ChallengeTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GBM_Challenge.app/GBM_Challenge";
@@ -784,6 +800,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XZZ74444UP;
 				INFOPLIST_FILE = GBM_ChallengeTests/Info.plist;
@@ -795,6 +812,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "me.testing.GBM-ChallengeTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "GBM_ChallengeTests/GBM_ChallengeTests-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GBM_Challenge.app/GBM_Challenge";

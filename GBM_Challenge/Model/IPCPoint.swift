@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct IPCPoint: Codable {
+struct IPCPoint: Codable, Equatable {
     static let dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ"
     
     var id: Int? = 0
@@ -16,6 +16,14 @@ struct IPCPoint: Codable {
     var percentageChange: Double
     var volume: Int
     var change: Double
+    
+    init(){
+        id = 0
+        price = 1.0
+        percentageChange = 1.0
+        volume = 10
+        change = 0.5
+    }
     
     init(fromDictionary dict: Dictionary<String, Any>){
         self.id = dict[IPCPoint.idAttribute] as? Int ?? 0
@@ -26,6 +34,11 @@ struct IPCPoint: Codable {
         self.percentageChange = dict[IPCPoint.percentageChangeAttribute] as? Double ?? 0.0
         self.volume = dict[IPCPoint.volumeAttribute] as? Int ?? 0
         self.change = dict[IPCPoint.changeAttribute] as? Double ?? 0.0
+    }
+    
+    static func ==(lhs: IPCPoint, rhs: IPCPoint) -> Bool {
+        let calendar = Calendar(identifier: .gregorian)
+        return calendar.isDate(lhs.date, equalTo: rhs.date, toGranularity: .second) && lhs.price == rhs.price && lhs.percentageChange == rhs.percentageChange && lhs.volume == rhs.volume && lhs.change == rhs.change
     }
 }
 

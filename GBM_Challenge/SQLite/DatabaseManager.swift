@@ -13,10 +13,15 @@ class DatabaseManager {
     static let shared = DatabaseManager()
     private var db: SQLiteDB!
     private let database_name = "database.sqlite"
+    private let test_database_name = "testdatabase.sqlite"
     
     private init(){
         sqliteQueue.sync{
-            db = SQLiteDB(databaseName: database_name)
+            var dbname = database_name
+            if let _ = ProcessInfo.processInfo.environment["XCTestBundlePath"] {
+                dbname = test_database_name
+            }
+            db = SQLiteDB(databaseName: dbname)
             _ = db.createTable(query: IPCPoint.createQuery())
         }
     }
