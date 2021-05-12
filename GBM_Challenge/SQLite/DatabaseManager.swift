@@ -8,16 +8,26 @@
 import Foundation
 
 class DatabaseManager {
+    /// All database access are performed in the same thrade
     private let sqliteQueue = DispatchQueue(label: "sqliteQueue")
     
+    /// SIngleton instance of the class
     static let shared = DatabaseManager()
+    
+    /// Instance to the SQLite class
     private var db: SQLiteDB!
+    
+    /// Database name
     private let database_name = "database.sqlite"
+    
+    /// Database name for XCTest executions
     private let test_database_name = "testdatabase.sqlite"
     
+    /// Controller Initializaton
     private init(){
         sqliteQueue.sync{
             var dbname = database_name
+            /// Use a differente database name if it is execiting Unit Tests
             if let _ = ProcessInfo.processInfo.environment["XCTestBundlePath"] {
                 dbname = test_database_name
             }
@@ -26,6 +36,12 @@ class DatabaseManager {
         }
     }
     
+    /// Inserts the IPCPoint object model to the database
+    ///
+    /// - Parameters:
+    ///     - ipc: The IPCPoint object.
+    ///
+    ///     - Returns: A boolean if insertion was successfull
     func insert(ipc: IPCPoint) -> Bool{
         var attrs = IPCPoint.attributes
         attrs.remove(at: 0)
@@ -40,6 +56,12 @@ class DatabaseManager {
         return false
     }
     
+    /// Inserts the IPCPoint object model to the database
+    ///
+    /// - Parameters:
+    ///     - ipc: The IPCPoint object.
+    ///
+    ///     - Returns: A boolean if insertion was successfull
     func fetchAllIPC() -> [IPCPoint]{
         var allIPC: [IPCPoint] = []
         let selectQuery = IPCPoint.selectAllQuery()
@@ -56,6 +78,7 @@ class DatabaseManager {
         return allIPC
     }
     
+    /// - Clears all the data in the IPC table
     func clearTableIPC() {
         var deleteSuccess = false
         sqliteQueue.sync{

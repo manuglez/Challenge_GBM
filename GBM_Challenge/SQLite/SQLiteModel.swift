@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Any Struct/Class that represents an SQLite Model or dable must implement this protocol
 protocol SQLiteModel {
     static var tableName: String { get }
     static var attributes: [String] { get }
@@ -17,11 +18,11 @@ protocol SQLiteModel {
     static func selectAllQuery() -> String
     static var deleteQuery: String { get }
 }
-
 protocol SQLiteDataType {
     func queryValue() -> String
 }
 
+/// The following extensions of Data Types describe how to represent its data inna SQL query
 extension Int: SQLiteDataType{
     func queryValue() -> String {
         return "\(self)"

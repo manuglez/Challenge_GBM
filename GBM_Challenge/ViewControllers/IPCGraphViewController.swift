@@ -9,10 +9,16 @@ import UIKit
 import Charts
 
 class IPCGraphViewController: UIViewController, IPCViewModelDelegate, ChartViewDelegate {
+    /// Segue name to IPCTableViewController
     let segueIdToList = "toList"
+    
+    /// View Model data
     var points:[IPCViewModel] = []
-        
+    
+    /// The UIActivityIndicator shown while the data is fetched from services
     @IBOutlet weak var indicator: UIActivityIndicatorView!
+    
+    /// The view where the chart is drawn
     @IBOutlet weak var ipcChart: LineChartView!
     
     override func viewDidLoad() {
@@ -28,11 +34,19 @@ class IPCGraphViewController: UIViewController, IPCViewModelDelegate, ChartViewD
         super.viewDidLayoutSubviews()
     }
 
+    /// Action from the Bar Button item to display the Detail View
+    ///
+    /// - Parameters:
+    ///     - sender: The Bar Button Item.
     @IBAction func listButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: segueIdToList, sender: self)
     }
     
     // MARK: - IPC ViewModel Delegate
+    /// Dalegate notifying the event that data has fetched from services or database
+    ///
+    /// - Parameters:
+    ///     - points: The array of objects od the model.
     func ipcDataFetched(_ points: [IPCViewModel]) {
         var entries: [ChartDataEntry] = []
         var c = 0
@@ -57,6 +71,7 @@ class IPCGraphViewController: UIViewController, IPCViewModelDelegate, ChartViewD
     // MARK: - Chart View Delegate
 }
 
+/// This class from the Charts library is used to indicate hiw to display the data label on the x axis.
 class DateAxisValueFormatter : NSObject, IAxisValueFormatter
 {
     var dates: [String] = []

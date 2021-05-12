@@ -16,9 +16,14 @@ protocol IPCViewModelDelegate: AnyObject {
 }
 
 class IPCController {
+    /// Delegate to notify the Model data is fetched
     weak var modelDelegate: IPCModelDelegate?
+    /// Delegate to notify the ViewModel data is fetched
     weak var viewModelDelegate: IPCViewModelDelegate?
     
+    /// Call this function to retrieve the data and recieve over the delegate
+    /// If the data is available in the database, the data is fetched from there
+    /// otherwise the data is fetched from Services
     func fetchAllDataPoints() {
         let db = DatabaseManager.shared
         let ipcData = db.fetchAllIPC()
@@ -29,6 +34,7 @@ class IPCController {
         }
     }
     
+    /// Calls the controller to fetch data from services
     func fetchDataFromService() {
         let service = IPCServiceContoller.shared
         service.ipcRequest { success, points in
@@ -43,6 +49,7 @@ class IPCController {
         }
     }
     
+    /// Calls the dalagate to send the fetched data model or view model.
     private func sendDataToDelegate(_ ipcPoints: [IPCPoint]) {
         DispatchQueue.main.async {
             self.modelDelegate?.ipcDataFetched(ipcPoints)

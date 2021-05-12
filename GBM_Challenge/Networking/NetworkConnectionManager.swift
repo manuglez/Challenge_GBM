@@ -6,6 +6,7 @@
 //
 
 import Foundation
+/// Struct that manages an Error during web connections
 struct WebRequestError: Error {
     enum ErrorType {
         case ServerNotFound
@@ -17,22 +18,38 @@ struct WebRequestError: Error {
     let type: ErrorType
 }
 
+/// Manages directly all the web connections to consume services.
 class NetworkConnectionManager {
     typealias Attribute = String
     typealias Value = String
+    /// A closure declaration of the service responces
     typealias ServiceCallback = (_ result: Result<Int, Error>, _ data: Data?) -> Void
     
+    /// The  URL string and instance of the service
     private var stringURL: String?
     private var requestURL: URL?
+    
+    ///the URLSessionDataTask that performs the service consumption
     var dataTask: URLSessionDataTask?
+    
+    /// The default URL Session that manages the connection with the service
     let defaultSession = URLSession(configuration: .default)
 
+    /// Initializarion of the manager with an URL String
     init(withURLString urlString: String) {
         //requestURL = URL(string: urlString)
         stringURL = urlString
     }
     
+    /// The callback that sends all the response data to the caller object
     private var responseCallback: ServiceCallback?
+    
+    /// Creates a URLRequest with defualt configurations and GET method
+    ///
+    /// - Parameters:
+    ///     - params: A Dictionary with all the parameters of the service to include in the URLRequest
+    ///
+    ///     - Returns: The URL Request object
     func createGETRequest(withParameters params: [Attribute:Value]) -> URLRequest?{
         dataTask?.cancel()
         if let stringURL = self.stringURL{
@@ -60,6 +77,11 @@ class NetworkConnectionManager {
         return nil
     }
     
+    /// Executes the web service from an URL Request
+    ///
+    /// - Parameters:
+    ///     - request: The URLRequest to perform the service
+    ///     - responseCallback: A closuse that receives the Data of the service response
     func executeService(withRequest request: URLRequest, responseCallback: @escaping ServiceCallback){
         self.responseCallback = responseCallback
         dataTask = defaultSession.dataTask(with: request, completionHandler: {[weak self] data, response, error in
@@ -81,8 +103,6 @@ class NetworkConnectionManager {
                 return
                 
             } else {
-                //let resulString = String(data: data, encoding: .utf8)
-                //let resultDict: [AnyHashable: Any] = ["result": resulString as Any]
                 responseCallback(.success(0), data)
             }
         })

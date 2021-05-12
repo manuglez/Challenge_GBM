@@ -7,9 +7,15 @@
 
 import Foundation
 
+/// Manages directly all the database access directly
 class SQLiteDB {
+    /// URL where database is stored
     private var databaseURL: URL?
+    
+    ///Global pointer to access the database
     private var dbPointer: OpaquePointer?
+    
+    /// Database initialitation.
     init(databaseName dbname: String) {
         let fileManager = FileManager.default
         do {
@@ -36,6 +42,12 @@ class SQLiteDB {
         }
     }
     
+    /// Crates a table on the database from a query string
+    ///
+    /// - Parameters:
+    ///     - createQuery: The table create query srring
+    ///
+    ///     - Returns: A bolean indicating the Table Create was successfull
     func createTable(query createQuery: String) -> Bool{
         if let dbPointer = dbPointer {
             let errMsg: UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>? = nil
@@ -49,7 +61,12 @@ class SQLiteDB {
         return false
     }
     
-    
+    /// Inserts a row to a table in the databasethe database from a query string
+    ///
+    /// - Parameters:
+    ///     - insertQuery: The table Insert query string
+    ///
+    ///     - Returns: A bolean indicating the insert was successfull
     func insert(query insertQuery: String) -> Bool{
         var success = false
         if let dbPointer = dbPointer {
@@ -67,6 +84,12 @@ class SQLiteDB {
         return success
     }
     
+    /// Selects data in the  database from a query string
+    ///
+    /// - Parameters:
+    ///     - selectQuery: The table Select query string
+    ///
+    ///     - Returns: A dictionary Array with the data
     func select(query selectQuery: String) -> [[String: Any]]{
         var resultDictionary: [[String: Any]] = []
         if let dbPointer = dbPointer {
@@ -115,6 +138,13 @@ class SQLiteDB {
         return resultDictionary
     }
     
+    /// Deletes data in the  database from a query string
+    ///
+    /// - Parameters:
+    ///     - selectQuery: The Delete query string
+    ///     - conditionDictionary: A dictionary with the conditions that perdorm the deletion. Can be nil to delete all the data in the table
+    ///
+    ///     - Returns: A boolean indicating the deletion was successfull
     func delete(from tableName: String, where conditionDictionary: [String: SQLiteDataType]?) -> Bool{
         var returnValue = false
         if let dbPointer = dbPointer {
@@ -147,12 +177,14 @@ class SQLiteDB {
         return returnValue
     }
     
+    /// String to represent a C Text value in SQLite
     private func getCCharText(_ cText: UnsafePointer<CChar>) -> String{
         let text = UnsafePointer<CChar>?(cText)
         let string = text != nil ? String(cString: text!) : "(nil)"
         return string
     }
     
+    /// String to represent a UInt Text value in SQLite
     private func getUInt8Text(_ cText: UnsafePointer<UInt8>) -> String{
         let text = UnsafePointer<UInt8>?(cText)
         let string = text != nil ? String(cString: text!) : "(nil)"

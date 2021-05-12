@@ -14,10 +14,18 @@ class IPCServiceContoller: WebServiceCaller {
     
     //private let baseUrl = "https://run.mocky.io/v3/cc4c350b-1f11-42a0-a1aa-f8593eafeb1e"
     
+    /// Singleton object if the controller
     static let shared = IPCServiceContoller()
     
+    /// prevents to call the initializer from outside the class
     private init(){}
     
+    /// makes the request to the IPC data service.
+    /// Calls the implementation of the WebServiceCaller protocol
+    ///
+    /// - Parameters:
+    ///     - ipcCallback: closure that receives the data from the service.
+
     func ipcRequest(ipcCallback: @escaping (Bool, [IPCPoint]?) -> Void) {
         makeRequest { sucess, data in
             if sucess {
@@ -38,6 +46,11 @@ class IPCServiceContoller: WebServiceCaller {
         }
     }
     
+    //MARK: - WebServiceCaller Delegate
+    /// Implementation of the WebServiceCaller protocol that makes the services call
+    ///
+    /// - Parameters:
+    ///     - ipcCallback: closure that receives the data from the service.
     func makeRequest(resultCallback: @escaping (Bool, Data) -> Void) {
         let netMng = NetworkConnectionManager(withURLString: baseUrl)
         if let request = netMng.createGETRequest(withParameters: [:]) {
@@ -59,24 +72,5 @@ class IPCServiceContoller: WebServiceCaller {
                 
             })
         }
-        
-        /*let callback: ServiceCallback = {
-            {
-                netMng.executeService(withRequest: request) { result, dictionaryData in
-                    switch result{
-                    case .success(let flag):
-                        print("Success \(flag)")
-                        resultCallback(true, dictionaryData)
-                        break
-                    case .failure(let error):
-                        print("Failure \(error.localizedDescription)")
-                        resultCallback(false, nil)
-                        break
-                    }
-                }
-            }
-        }*/
-       // if let request = netMng.createGETRequest(withParameters: [], callback
-        
     }
 }

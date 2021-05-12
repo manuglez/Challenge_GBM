@@ -10,11 +10,20 @@ import UIKit
 class IPCTableViewController: UITableViewController, IPCModelDelegate {
     let cellIdentifier = "cellIdetifier"
     
+    // model that reprecents our data
     var modelData: [IPCPoint] = []
+    
+    // our controller that fetches data from services and database
     var ipcCpntroller = IPCController()
+    
+    // A DiipatchQueue that waits every 'delayTime' secondos to fetch de data from services.
     var delayThread: DispatchWorkItem?
-    let dekayTime = 5.0 // Tiempo de espera de 5 segundos
+    let delayTime = 5.0 // Tiempo de espera de 5 segundos
+    
+    // Our flag that indicates to sort our data by date in ascendig or descending order
     var descendingOrder = true
+    
+    // Names for the Bar button icon image to show the current order.
     let ascendingImageName = "arrow.up.to.line.alt"
     let descendingImageName = "arrow.down.to.line.alt"
     
@@ -36,6 +45,10 @@ class IPCTableViewController: UITableViewController, IPCModelDelegate {
         invalidateDelayThread()
     }
     
+    /// Bar button item action that toggles the value in 'descendingOrder' flag.
+    ///
+    /// - Parameters:
+    ///     - sender: The Bar Button Item.
     @IBAction func toggleOrder(_ sender: Any){
         descendingOrder = !descendingOrder
         navigationItem.rightBarButtonItem?.image = UIImage(
@@ -46,10 +59,13 @@ class IPCTableViewController: UITableViewController, IPCModelDelegate {
     }
     
     // MARK: - Functions
+    /// Sorts the model data by date in descending order whef descendingOrder is true
+    /// sorts in ascending order otherwise,
     func sortData(){
         modelData.sort { ($0.date > $1.date) == descendingOrder }
     }
     
+    /// Calls the web service to reload the data
     func reloadServiceData(){
         ipcCpntroller.fetchDataFromService()
         let indicator = UIActivityIndicatorView(style: .medium)
@@ -64,9 +80,10 @@ class IPCTableViewController: UITableViewController, IPCModelDelegate {
             self.reloadServiceData()
         })
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + dekayTime, execute: delayThread!)
+        DispatchQueue.main.asyncAfter(deadline: .now() + delayTime, execute: delayThread!)
     }
     
+    /// Stops the current DispatchQueue that is waiting to execute.
     func invalidateDelayThread()
     {
         if let delayT = delayThread
@@ -116,6 +133,10 @@ class IPCTableViewController: UITableViewController, IPCModelDelegate {
     }
 
     //MARK: - IPC Model delegate
+    /// Dalegate notifying the event that data has fetched from services
+    ///
+    /// - Parameters:
+    ///     - points: The array of objects od the model.
     func ipcDataFetched(_ points: [IPCPoint]) {
         modelData = points
         sortData()
