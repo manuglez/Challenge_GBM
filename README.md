@@ -11,8 +11,9 @@ The graph is done with the Cocoapods library ['Charts'](https://cocoapods.org/po
 
 ## Architecture
 
+The app architecture followed the MVC pattern. The classes organization is shown with the following imag:
 
-## Future work
+![app achitecture](arq.png)
 
 
 ## Author
